@@ -30,9 +30,12 @@ ifeq ($(UNAME_S), Darwin)
 endif
 
 clean: 
-	rm -fr *.o *.a *.gch *.gcno *.gcda gcov_test s21_test.info ./report ./test
+	rm -fr *.o *.gch *.gcno *.gcda gcov_test s21_test.info ./report ./test
 
-rebuild: clean test 
+clean_lib:
+	rm -rf *.a
+
+rebuild: clean_lib s21_matrix.a clean
 
 gcov_report: 
 	$(CC) $(FLAGS) $(GCOV_FLAGS) ${TEST_LIB} ${MATRIX} ${LINK_FLAGS} -o test
